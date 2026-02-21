@@ -1,0 +1,20 @@
+{
+    "name": "beans",
+    "id": "beans",
+    "version": "1.0.0",
+    "description": "Installs beans, a task tracking tool for developers and AI agents.",
+    "documentationURL": "https://github.com/fxyoge/features/tree/main/src/beans",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest"
+            ],
+            "default": "latest",
+            "description": "Select version of beans."
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
