@@ -1,7 +1,7 @@
 {
     "name": "beans",
     "id": "beans",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Installs beans, a task tracking tool for developers and AI agents.",
     "documentationURL": "https://github.com/fxyoge/features/tree/main/src/beans",
     "options": {
