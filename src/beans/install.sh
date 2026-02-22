@@ -112,10 +112,10 @@ find_version_from_git_tags BEANS_VERSION "https://github.com/hmans/beans" "tags/
 
 check_packages curl ca-certificates
 echo "Downloading beans ${BEANS_VERSION}..."
-mkdir /tmp/beans
-curl -sL "https://github.com/hmans/beans/releases/download/v${BEANS_VERSION}/beans_Linux_${arch}.tar.gz" | tar xz -C /tmp/beans
-mv "/tmp/beans/beans" /usr/local/bin/beans
-rm -rf /tmp/beans
+BEANS_TMP=$(mktemp -d -p /var/tmp)
+trap 'rm -rf "${BEANS_TMP}"' EXIT
+curl -sL "https://github.com/hmans/beans/releases/download/v${BEANS_VERSION}/beans_Linux_${arch}.tar.gz" | tar xz -C "${BEANS_TMP}"
+mv "${BEANS_TMP}/beans" /usr/local/bin/beans
 
 # Clean up
 cleanup
