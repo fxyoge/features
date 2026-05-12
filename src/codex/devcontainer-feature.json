@@ -2,6 +2,9 @@
     "id": "codex",
     "version": "0.1.0",
     "name": "Codex",
+    "dependsOn": {
+        "ghcr.io/devcontainers/features/node:2": {}
+    },
     "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils"
     ],
