@@ -4,6 +4,11 @@
       "version": "2.16.1",
       "resolved": "ghcr.io/devcontainers/features/docker-in-docker@sha256:ce078b7bf7d9ef3bcb9813b32103795d8d72172446890b64772cbe1dec6baafd",
       "integrity": "sha256:ce078b7bf7d9ef3bcb9813b32103795d8d72172446890b64772cbe1dec6baafd"
+    },
+    "ghcr.io/jsburckhardt/devcontainer-features/codex:1": {
+      "version": "1.0.0",
+      "resolved": "ghcr.io/jsburckhardt/devcontainer-features/codex@sha256:e6ec5fabc4c804ddda9e0aee677d13e989decc7fbbdcf27f70551f986bb9b28a",
+      "integrity": "sha256:e6ec5fabc4c804ddda9e0aee677d13e989decc7fbbdcf27f70551f986bb9b28a"
     }
   }
 }
