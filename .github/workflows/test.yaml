@@ -43,8 +43,6 @@ jobs:
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
           - debian:stable-slim
-          - ubuntu:focal
-          - ubuntu:jammy
     steps:
       - uses: actions/checkout@v4
 
