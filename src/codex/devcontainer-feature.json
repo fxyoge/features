@@ -9,6 +9,5 @@
         "source": "${devcontainerId}-codex-config",
         "target": "/home/vscode/.codex",
         "type": "volume"
-    }],
-    "postCreateCommand": "bash .devcontainer/features/fxyoge/src/codex/postCreateCommand.sh"
+    }]
 }
