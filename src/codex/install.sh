@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 USERNAME="${USERNAME:-"${_REMOTE_USER:-"automatic"}"}"
+FEATURE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LIFECYCLE_DIR="/usr/local/share/devcontainer-features/fxy-codex"
 
 set -euo pipefail
 
@@ -33,6 +35,9 @@ run_as_user() {
     fi
 }
 
+mkdir -p "${LIFECYCLE_DIR}"
+cp "${FEATURE_DIR}/postCreateCommand.sh" "${LIFECYCLE_DIR}/postCreateCommand.sh"
+chmod 0755 "${LIFECYCLE_DIR}/postCreateCommand.sh"
+
 mkdir -p "/home/${USERNAME}/.codex"
 chown -R "${USERNAME}:${USERNAME}" "/home/${USERNAME}/.codex"
-run_as_user "${USERNAME}" "npm install -g @openai/codex"
