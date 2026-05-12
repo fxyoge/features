@@ -1,0 +1,14 @@
+{
+    "id": "codex",
+    "version": "0.1.0",
+    "name": "Codex",
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ],
+    "mounts": [{
+        "source": "${devcontainerId}-codex-config",
+        "target": "/home/vscode/.codex",
+        "type": "volume"
+    }],
+    "postCreateCommand": "bash .devcontainer/features/fxyoge/src/codex/postCreateCommand.sh"
+}
