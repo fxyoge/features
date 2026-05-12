@@ -28,6 +28,7 @@ jobs:
         with:
           filters: |
             beans: ./**/beans/**
+            fxy-codex: ./**/fxy-codex/**
 
   test-features-changes:
     needs:
@@ -40,7 +41,6 @@ jobs:
         baseImage:
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
-          - mcr.microsoft.com/devcontainers/base:alpine
           - debian:stable-slim
           - ubuntu:focal
           - ubuntu:jammy
@@ -79,10 +79,10 @@ jobs:
       matrix:
         features:
           - beans
+          - fxy-codex
         baseImage:
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
-          - mcr.microsoft.com/devcontainers/base:alpine
           - debian:stable-slim
           - ubuntu:focal
           - ubuntu:jammy
@@ -103,6 +103,7 @@ jobs:
       matrix:
         features:
           - beans
+          - fxy-codex
     steps:
       - uses: actions/checkout@v4
 

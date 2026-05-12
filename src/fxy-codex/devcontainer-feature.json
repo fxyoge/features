@@ -1,0 +1,16 @@
+{
+    "id": "fxy-codex",
+    "version": "0.1.0",
+    "name": "Fxy-Codex",
+    "dependsOn": {
+        "ghcr.io/jsburckhardt/devcontainer-features/codex:1": {}
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ],
+    "mounts": [{
+        "source": "${devcontainerId}-codex-config",
+        "target": "/home/vscode/.codex",
+        "type": "volume"
+    }]
+}
