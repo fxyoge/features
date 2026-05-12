@@ -1,9 +1,9 @@
 {
-    "id": "codex",
+    "id": "fxy-codex",
     "version": "0.1.0",
-    "name": "Codex",
+    "name": "Fxy-Codex",
     "dependsOn": {
-        "ghcr.io/devcontainers/features/node:2": {}
+        "ghcr.io/jsburckhardt/devcontainer-features/codex:1": {}
     },
     "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils"
