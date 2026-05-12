@@ -1,0 +1,17 @@
+{
+    "id": "fxy-godot",
+    "version": "0.1.0",
+    "name": "Fxy-Godot",
+    "dependsOn": {
+        "ghcr.io/devcontainers/features/dotnet:2": {}
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ],
+    "mounts": [{
+        "source": "${devcontainerId}-godotenv-config",
+        "target": "/home/vscode/.config/godotenv",
+        "type": "volume"
+    }],
+    "postCreateCommand": "bash /usr/local/share/devcontainer-features/fxy-godot/postCreateCommand.sh"
+}

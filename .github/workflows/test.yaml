@@ -29,6 +29,7 @@ jobs:
           filters: |
             beans: ./**/beans/**
             fxy-codex: ./**/fxy-codex/**
+            fxy-godot: ./**/fxy-godot/**
 
   test-features-changes:
     needs:
@@ -38,12 +39,10 @@ jobs:
     strategy:
       matrix:
         features: ${{ fromJSON(needs.detect-changes.outputs.features) }}
-        baseImage:
+        baseImage: &base_images
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
           - debian:stable-slim
-          - ubuntu:focal
-          - ubuntu:jammy
     steps:
       - uses: actions/checkout@v4
 
@@ -51,6 +50,29 @@ jobs:
         run: npm install -g @devcontainers/cli
 
       - name: "Generating tests for '${{ matrix.features }}' against '${{ matrix.baseImage }}'"
+        run: devcontainer features test --skip-scenarios -f ${{ matrix.features }} -i ${{ matrix.baseImage }} .
+
+  test-features-changes-alpine:
+    needs:
+      - detect-changes
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      matrix:
+        features: &alpine_features
+          - beans
+        baseImage: &alpine_base_images
+          - mcr.microsoft.com/devcontainers/base:alpine
+    steps:
+      - uses: actions/checkout@v4
+        if: ${{ contains(fromJSON(needs.detect-changes.outputs.features), matrix.features) }}
+
+      - name: "Install latest devcontainer CLI"
+        if: ${{ contains(fromJSON(needs.detect-changes.outputs.features), matrix.features) }}
+        run: npm install -g @devcontainers/cli
+
+      - name: "Generating tests for '${{ matrix.features }}' against '${{ matrix.baseImage }}'"
+        if: ${{ contains(fromJSON(needs.detect-changes.outputs.features), matrix.features) }}
         run: devcontainer features test --skip-scenarios -f ${{ matrix.features }} -i ${{ matrix.baseImage }} .
 
   test-scenarios-changes:
@@ -77,15 +99,28 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        features:
+        features: &all_features
           - beans
           - fxy-codex
-        baseImage:
-          - mcr.microsoft.com/devcontainers/base:ubuntu
-          - mcr.microsoft.com/devcontainers/base:debian
-          - debian:stable-slim
-          - ubuntu:focal
-          - ubuntu:jammy
+          - fxy-godot
+        baseImage: *base_images
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Install latest devcontainer CLI"
+        run: npm install -g @devcontainers/cli
+
+      - name: "Generating tests for '${{ matrix.features }}' against '${{ matrix.baseImage }}'"
+        run: devcontainer features test --skip-scenarios -f ${{ matrix.features }} -i ${{ matrix.baseImage }} .
+
+  test-all-alpine:
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      matrix:
+        features: *alpine_features
+        baseImage: *alpine_base_images
     steps:
       - uses: actions/checkout@v4
 
@@ -101,9 +136,7 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        features:
-          - beans
-          - fxy-codex
+        features: *all_features
     steps:
       - uses: actions/checkout@v4
 
